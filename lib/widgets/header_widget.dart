@@ -31,27 +31,31 @@ class HeaderWidget extends StatelessWidget {
                 radius: 40,
                 backgroundImage: NetworkImage("https://picsum.photos/seed/picsum/200/300"),
               ),
-              Positioned(
-                right: 3,
-                bottom: 0,
-                child: Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 4,
-                  ), 
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(999),
-                    color: Colors.pinkAccent
-                  ),
-                  child: Text("level $level",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 10,
-                    fontWeight: FontWeight.bold
-                  ),
-                  ),
-                ),
-              )
+Positioned(
+  bottom: 0,
+  left: 0,
+  right: 0,
+  child: Center(
+    child: Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: 8,
+        vertical: 4,
+      ), 
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(999),
+        color: Colors.pinkAccent
+      ),
+      child: Text(
+        "level $level",
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 10,
+          fontWeight: FontWeight.bold
+        ),
+      ),
+    ),
+  ),
+)
             ],
           ),
           SizedBox(width: 10,),
@@ -65,7 +69,7 @@ class HeaderWidget extends StatelessWidget {
                   fontWeight: .bold,
                   fontSize: 19      
                   )),
-                Text("Role $role",)
+                Text("role",)
               ],
             )
 

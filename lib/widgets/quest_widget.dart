@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 
-
 class QuestWidget extends StatelessWidget {
-  const QuestWidget({super.key});
+  final String title;
+  final String reward;
+
+  const QuestWidget({
+    super.key,
+    required this.title,
+    required this.reward
+  });
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        
-      },
+    return Padding(
+  padding: const EdgeInsets.only(bottom: 10),
+  child: InkWell(
+      onTap: () {},
       borderRadius: BorderRadius.circular(14),
       child: Ink(
         padding: const EdgeInsets.all(10),
@@ -23,9 +29,10 @@ class QuestWidget extends StatelessWidget {
               blurRadius: 4,
               offset: const Offset(0, 2)
             )
-          ]
-          ),
-          child: Row(children: [
+          ],
+        ),
+        child: Row(
+          children: [
             Container(
               width: 40,
               height: 40,
@@ -33,20 +40,25 @@ class QuestWidget extends StatelessWidget {
                 color: Colors.pinkAccent.withAlpha(12),
                 borderRadius: BorderRadius.circular(999)
               ),
-              child: Icon(Icons.task_alt, color: const Color.fromARGB(255, 253, 80, 138), ),
+              child: Icon(
+                Icons.task_alt,
+                color: const Color.fromARGB(255, 253, 80, 138),
+              ),
             ),
             Expanded(
               child: Column(
-                crossAxisAlignment: .start, 
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Memburu Rusa"), 
-                  SizedBox(height: 2,),
-                  Text("Reward : 100+ Gold")
+                  Text(title),
+                  SizedBox(height: 2),
+                  Text("Reward : $reward"),
                 ],
               ),
             )
-          ],),
+          ],
         ),
-      );
+      ),
+  ),
+    );
   }
 }

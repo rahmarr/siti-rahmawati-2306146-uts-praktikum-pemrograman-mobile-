@@ -25,7 +25,7 @@ class ChipWidget extends StatelessWidget {
         children: [
           Icon(icon, size: 19, color: color,),
           SizedBox(width: 10,),
-          Text(label, style: TextStyle(color: color),),
+          Text(label, style: TextStyle(color: Colors.black),),
           Text(value.toString(), style: const TextStyle(fontWeight: FontWeight.bold),),
 
 
