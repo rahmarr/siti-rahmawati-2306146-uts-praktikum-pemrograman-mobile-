@@ -15,6 +15,7 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _levelController = TextEditingController();
   final TextEditingController _rankController = TextEditingController();
   final TextEditingController _jobController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController(); // Password controller baru
 
   @override
   Widget build(BuildContext context) {
@@ -79,22 +80,45 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 40),
 
                   _buildLabel("your name 💕"),
-                  _buildTextField(_nameController, "sweet name...", false),
+                  _buildTextField(_nameController, "sweet name...", false, (value) {
+                    if (value == null || value.isEmpty) return "don't leave this empty 💕";
+                    return null;
+                  }),
+
+                  const SizedBox(height: 16),
+
+                  _buildLabel("password ✨"),
+                  _buildTextField(_passwordController, "min 8 characters...", false, (value) {
+                    if (value == null || value.isEmpty) return "password is required ✨";
+                    if (value.length < 8) return "minimum 8 characters ya 💫"; // Validasi minimal 8
+                    return null;
+                  }, isPassword: true),
 
                   const SizedBox(height: 16),
 
                   _buildLabel("your level ✨"),
-                  _buildTextField(_levelController, "magic level...", true),
+                  _buildTextField(_levelController, "magic level...", true, (value) {
+                    if (value == null || value.isEmpty) return "don't leave this empty ✨";
+                    if (int.tryParse(value) == null) return "numbers only please 💫";
+                    return null;
+                  }),
 
                   const SizedBox(height: 16),
 
                   _buildLabel("your rank 👑"),
-                  _buildTextField(_rankController, "princess rank...", false),
+                  _buildTextField(_rankController, "princess rank...", false, (value) {
+                    if (value == null || value.isEmpty) return "don't leave this empty 👑";
+                    if (!RegExp(r'^[A-Za-z]+$').hasMatch(value)) return "letters only for rank 💖";
+                    return null;
+                  }),
 
                   const SizedBox(height: 16),
 
                   _buildLabel("your job 🧁"),
-                  _buildTextField(_jobController, "dream job...", false),
+                  _buildTextField(_jobController, "dream job...", false, (value) {
+                    if (value == null || value.isEmpty) return "what's your job? 🧁";
+                    return null;
+                  }),
 
                   const SizedBox(height: 40),
 
@@ -154,9 +178,10 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _buildTextField(TextEditingController controller, String hint, bool isNumber) {
+  Widget _buildTextField(TextEditingController controller, String hint, bool isNumber, String? Function(String?) validator, {bool isPassword = false}) {
     return TextFormField(
       controller: controller,
+      obscureText: isPassword,  
       keyboardType: isNumber ? TextInputType.number : TextInputType.text,
       style: GoogleFonts.quicksand(fontWeight: FontWeight.w600),
       decoration: InputDecoration(
@@ -182,11 +207,7 @@ class _LoginPageState extends State<LoginPage> {
           borderSide: const BorderSide(color: Colors.redAccent, width: 2),
         ),
       ),
-      validator: (value) {
-        if (value == null || value.isEmpty) return "don't leave this empty 💕";
-        if (isNumber && int.tryParse(value) == null) return "numbers only please 💫";
-        return null;
-      },
+      validator: validator,
     );
   }
 }
